@@ -1,3 +1,4 @@
+open NavigationConfig;
 open BsReactNative;
 let styles =
   Style.(
@@ -12,7 +13,27 @@ let component = ReasonReact.statelessComponent("App");
 let make = _children => {
   ...component,
   render: _self =>
-    <View style=styles##container> <Text value="HackerNews" /> </View>,
+    <StackNavigator
+      initialState=[|Config.Home|]
+      onStateChange=(
+        state =>
+          AsyncStorage.setItem(
+            "$state",
+            state |> StackNavigator.Persistence.encode |> Js.Json.stringify,
+            (),
+          )
+          |> ignore
+      )>
+      ...(
+           (~currentRoute, ~navigation) =>
+             switch (currentRoute) {
+             | Config.Home => <Home navigation />
+             | Config.Detail => <Detail navigation />
+             /* | Config.Admin => <Admin navigation /> */
+             /* | Config.Welcome => <Welcome navigation /> */
+             }
+         )
+    </StackNavigator>,
 };
 
 let default = ReasonReact.wrapReasonForJs(~component, _ => make([||]));

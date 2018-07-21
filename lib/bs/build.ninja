@@ -5,7 +5,7 @@ bsdep = /Users/Me/projects/training/hackernews/node_modules/bs-platform/lib/bsb_
 warnings = -w -30-40+6+7+27+32..39+44+45+101
 bsc_flags = -bs-suffix -nostdlib -I '/Users/Me/projects/training/hackernews/node_modules/bs-platform/lib/ocaml' -bs-no-version-header -bs-super-errors -no-alias-deps -color always
 ppx_flags = 
-bs_package_includes = -I /Users/Me/projects/training/hackernews/node_modules/reason-react/lib/ocaml -I /Users/Me/projects/training/hackernews/node_modules/bs-react-native/lib/ocaml -I /Users/Me/projects/training/hackernews/node_modules/@glennsl/bs-json/lib/ocaml
+bs_package_includes = -I /Users/Me/projects/training/hackernews/node_modules/reason-react/lib/ocaml -I /Users/Me/projects/training/hackernews/node_modules/bs-react-native/lib/ocaml -I /Users/Me/projects/training/hackernews/node_modules/@glennsl/bs-json/lib/ocaml -I /Users/Me/projects/training/hackernews/node_modules/reroute-native/lib/ocaml
 bs_package_dev_includes = 
 namespace = -ns Hackernews
 bsb_dir_group = 0
@@ -28,8 +28,23 @@ rule build_cmj_cmi
 build src/App-Hackernews.cmj |  $src_root_dir/src/App.bs.js src/App-Hackernews.cmi : build_cmj_cmi src/App.mlast
   bsc_flags = $bsc_flags -bs-re-out -bs-super-errors
   bs_package_flags = $bs_package_flags  -bs-package-output commonjs:src
+build src/Home.mlast : build_ast_and_module_sets_from_re $src_root_dir/src/Home.re
+build src/Home.mlast.d : build_deps src/Home.mlast
+build src/Home-Hackernews.cmj |  $src_root_dir/src/Home.bs.js src/Home-Hackernews.cmi : build_cmj_cmi src/Home.mlast
+  bsc_flags = $bsc_flags -bs-re-out -bs-super-errors
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:src
+build src/Detail.mlast : build_ast_and_module_sets_from_re $src_root_dir/src/Detail.re
+build src/Detail.mlast.d : build_deps src/Detail.mlast
+build src/Detail-Hackernews.cmj |  $src_root_dir/src/Detail.bs.js src/Detail-Hackernews.cmi : build_cmj_cmi src/Detail.mlast
+  bsc_flags = $bsc_flags -bs-re-out -bs-super-errors
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:src
+build src/NavigationConfig.mlast : build_ast_and_module_sets_from_re $src_root_dir/src/NavigationConfig.re
+build src/NavigationConfig.mlast.d : build_deps src/NavigationConfig.mlast
+build src/NavigationConfig-Hackernews.cmj |  $src_root_dir/src/NavigationConfig.bs.js src/NavigationConfig-Hackernews.cmi : build_cmj_cmi src/NavigationConfig.mlast
+  bsc_flags = $bsc_flags -bs-re-out -bs-super-errors
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:src
 rule build_package
   command = ${bsc} -w -49 -no-alias-deps -c ${in}
   description = [34mBuilding[39m [2m${out}[22m
 build Hackernews.cmi : build_package Hackernews.mlmap
-build build.ninja : phony  ||  Hackernews.cmi src/App.mlast.d
+build build.ninja : phony  ||  Hackernews.cmi src/NavigationConfig.mlast.d src/Detail.mlast.d src/Home.mlast.d src/App.mlast.d

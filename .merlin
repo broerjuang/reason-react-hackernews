@@ -13,6 +13,8 @@ S /Users/Me/projects/training/hackernews/node_modules/bs-react-native/lib/ocaml
 B /Users/Me/projects/training/hackernews/node_modules/bs-react-native/lib/ocaml
 S /Users/Me/projects/training/hackernews/node_modules/@glennsl/bs-json/lib/ocaml
 B /Users/Me/projects/training/hackernews/node_modules/@glennsl/bs-json/lib/ocaml
+S /Users/Me/projects/training/hackernews/node_modules/reroute-native/lib/ocaml
+B /Users/Me/projects/training/hackernews/node_modules/reroute-native/lib/ocaml
 S src
 B lib/bs/src
 ####BSB GENERATED: NO EDIT}

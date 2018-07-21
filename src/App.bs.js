@@ -1,11 +1,13 @@
 'use strict';
 
+var Curry = require("bs-platform/lib/js/curry.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
-var Js_primitive = require("bs-platform/lib/js/js_primitive.js");
-var Text$BsReactNative = require("bs-react-native/src/components/text.js");
-var View$BsReactNative = require("bs-react-native/src/components/view.js");
+var Home$Hackernews = require("./Home.bs.js");
+var Detail$Hackernews = require("./Detail.bs.js");
 var Style$BsReactNative = require("bs-react-native/src/style.js");
 var StyleSheet$BsReactNative = require("bs-react-native/src/styleSheet.js");
+var AsyncStorage$BsReactNative = require("bs-react-native/src/asyncStorage.js");
+var NavigationConfig$Hackernews = require("./NavigationConfig.bs.js");
 
 var styles = StyleSheet$BsReactNative.create({
       container: Style$BsReactNative.style(/* :: */[
@@ -34,7 +36,16 @@ function make() {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function () {
-              return ReasonReact.element(undefined, undefined, View$BsReactNative.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, Js_primitive.some(styles.container), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)(/* array */[ReasonReact.element(undefined, undefined, Text$BsReactNative.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "HackerNews", /* array */[]))]));
+              return ReasonReact.element(undefined, undefined, Curry._5(NavigationConfig$Hackernews.StackNavigator[/* make */1], /* array */[/* Home */0], (function (state) {
+                                AsyncStorage$BsReactNative.setItem("$state", JSON.stringify(Curry._1(NavigationConfig$Hackernews.StackNavigator[/* Persistence */0][/* encode */0], state)), undefined, /* () */0);
+                                return /* () */0;
+                              }), undefined, undefined, (function (currentRoute, navigation) {
+                                if (currentRoute) {
+                                  return ReasonReact.element(undefined, undefined, Detail$Hackernews.make(navigation, /* array */[]));
+                                } else {
+                                  return ReasonReact.element(undefined, undefined, Home$Hackernews.make(navigation, /* array */[]));
+                                }
+                              })));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],
