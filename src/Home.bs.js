@@ -1,5 +1,6 @@
 'use strict';
 
+var $$Array = require("bs-platform/lib/js/array.js");
 var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
@@ -154,7 +155,7 @@ var NewsList = /* module */[
 
 var component$1 = ReasonReact.statelessComponent("Home");
 
-function make$1(navigation, _) {
+function make$1(stories, navigation, _) {
   return /* record */[
           /* debugName */component$1[/* debugName */0],
           /* reactClassInternal */component$1[/* reactClassInternal */1],
@@ -176,11 +177,9 @@ function make$1(navigation, _) {
                               undefined,
                               undefined,
                               (function () {
-                                  return ReasonReact.element(undefined, undefined, View$BsReactNative.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, Js_primitive.some(styles.container), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)(/* array */[
-                                                  ReasonReact.element(undefined, undefined, make(navigation, /* array */[])),
-                                                  ReasonReact.element(undefined, undefined, make(navigation, /* array */[])),
-                                                  ReasonReact.element(undefined, undefined, make(navigation, /* array */[]))
-                                                ]));
+                                  return ReasonReact.element(undefined, undefined, View$BsReactNative.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, Js_primitive.some(styles.container), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)(/* array */[$$Array.map((function (story) {
+                                                          return ReasonReact.element(String(story[/* id */2]), undefined, make(navigation, /* array */[]));
+                                                        }), stories)]));
                                 })
                             ]));
             }),

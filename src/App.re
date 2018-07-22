@@ -8,11 +8,36 @@ let styles =
     })
   );
 
-let component = ReasonReact.statelessComponent("App");
+type state = {
+  page: int,
+  stories: array(StoryData.story),
+};
+type action =
+  | FetchTopStories
+  | FetchTopStoriesLoaded(int, array(StoryData.story));
+
+let component = ReasonReact.reducerComponent("App");
 
 let make = _children => {
   ...component,
-  render: _self =>
+  initialState: () => {page: 0, stories: [||]},
+  didMount: self => self.send(FetchTopStories),
+  reducer: (action, state) =>
+    switch (action) {
+    | FetchTopStories =>
+      ReasonReact.SideEffects(
+        (
+          self =>
+            StoryData.fetchTopStories(state.page + 1, payload =>
+              self.send(FetchTopStoriesLoaded(fst(payload), snd(payload)))
+            )
+            |> ignore
+        ),
+      )
+    | FetchTopStoriesLoaded(page, stories) =>
+      ReasonReact.Update({page, stories})
+    },
+  render: self =>
     <StackNavigator
       initialState=[|Config.Home|]
       onStateChange=(
@@ -27,7 +52,7 @@ let make = _children => {
       ...(
            (~currentRoute, ~navigation) =>
              switch (currentRoute) {
-             | Config.Home => <Home navigation />
+             | Config.Home => <Home navigation stories=self.state.stories />
              | Config.Detail => <Detail navigation />
              }
          )

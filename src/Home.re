@@ -71,16 +71,21 @@ module NewsList = {
 
 let component = ReasonReact.statelessComponent("Home");
 
-let make = (~navigation, _children) => {
+let make = (~stories: array(StoryData.story), ~navigation, _children) => {
   ...component,
   render: _self =>
     <StackNavigator.Screen headerTitle="Hacker News" navigation>
       ...(
            () =>
              <View style=styles##container>
-               <NewsList navigation />
-               <NewsList navigation />
-               <NewsList navigation />
+               (
+                 Array.map(
+                   (story: StoryData.story) =>
+                     <NewsList key=(story.id |> string_of_int) navigation />,
+                   stories,
+                 )
+                 |> ReasonReact.array
+               )
              </View>
          )
     </StackNavigator.Screen>,

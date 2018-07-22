@@ -1,1 +1,1 @@
-src/Home-Hackernews.cmj : src/NavigationConfig-Hackernews.cmj
+src/Home-Hackernews.cmj : src/NavigationConfig-Hackernews.cmj src/StoryData-Hackernews.cmj
