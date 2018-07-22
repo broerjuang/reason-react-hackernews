@@ -6,7 +6,8 @@
     "reason-react",
     "bs-react-native",
     "@glennsl/bs-json",
-    "reroute-native"
+    "reroute-native",
+    "bs-fetch"
   ],
   "namespace": true,
   "reason": {
