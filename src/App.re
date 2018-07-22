@@ -29,8 +29,6 @@ let make = _children => {
              switch (currentRoute) {
              | Config.Home => <Home navigation />
              | Config.Detail => <Detail navigation />
-             /* | Config.Admin => <Admin navigation /> */
-             /* | Config.Welcome => <Welcome navigation /> */
              }
          )
     </StackNavigator>,

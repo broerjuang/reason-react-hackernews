@@ -1,9 +1,12 @@
 'use strict';
 
+var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
+var Js_primitive = require("bs-platform/lib/js/js_primitive.js");
 var Text$BsReactNative = require("bs-react-native/src/components/text.js");
 var View$BsReactNative = require("bs-react-native/src/components/view.js");
+var Style$BsReactNative = require("bs-react-native/src/style.js");
 var Button$BsReactNative = require("bs-react-native/src/components/button.js");
 var NavigationConfig$Hackernews = require("./NavigationConfig.bs.js");
 
@@ -25,7 +28,10 @@ function make(navigation, _) {
                               navigation,
                               undefined,
                               "Detail",
-                              undefined,
+                              Js_primitive.some(Style$BsReactNative.style(/* :: */[
+                                        Style$BsReactNative.backgroundColor(/* String */Block.__(0, ["red"])),
+                                        /* [] */0
+                                      ])),
                               undefined,
                               undefined,
                               undefined,

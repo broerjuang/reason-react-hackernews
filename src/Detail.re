@@ -6,7 +6,10 @@ let component = ReasonReact.statelessComponent("Detail");
 let make = (~navigation: StackNavigator.navigation, _children) => {
   ...component,
   render: _self =>
-    <StackNavigator.Screen headerTitle="Detail" navigation>
+    <StackNavigator.Screen
+      headerTitle="Detail"
+      navigation
+      headerStyle=Style.(style([backgroundColor(String("red"))]))>
       ...(
            () =>
              <View>
